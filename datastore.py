@@ -94,6 +94,8 @@ def insert_route(data):
     for entry in data:
         values = entry.values()
         cur.execute(SQL['insert_route'],list(values))
+    conn.commit()
+    conn.close()
         
 
 def insert_service(data):
@@ -103,6 +105,8 @@ def insert_service(data):
     for entry in data:
         values = entry.values()
         cur.execute(SQL['insert_service'],list(values))
+    conn.commit()
+    conn.close()
         
 
 def insert_stops(data):
@@ -112,6 +116,8 @@ def insert_stops(data):
     for entry in data:
         values = entry.values()
         cur.execute(SQL['insert_stops'],list(values))
+    conn.commit()
+    conn.close()
         
 
 # def get_routes(data)
