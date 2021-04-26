@@ -48,17 +48,17 @@ SQL = {
     ''',
 
     'insert_route':'''
-    INSERT INTO bus_routes
+    INSERT INTO bus_routes("ServiceNo","Operator","Direction","StopSequence","BusStopCode","Distance","WD_FirstBus","WD_LastBus","SAT_FirstBus","SAT_LastBus","SUN_FirstBus","SUN_LastBus")
     VALUES(?,?,?,?,?,?,?,?,?,?,?,?);
     ''',
 
     'insert_service':'''
-    INSERT INTO bus_services
+    INSERT INTO bus_services("ServiceNo","Operator","Direction","Category","OriginCode","DestinationCode","AM_Peak_Freq","AM_Offpeak_Freq","PM_Peak_Freq","PM_Offpeak_Freq","LoopDesc")
     VALUES(?,?,?,?,?,?,?,?,?,?,?);
     ''',
 
     'insert_stops':'''
-    INSERT INTO bus_stops
+    INSERT INTO bus_stops("BusStopCode","RoadName","Description","Latitude","Longitude")
     VALUES(?,?,?,?,?);
     ''',
 
@@ -94,7 +94,7 @@ def insert_route(data):
     for entry in data:
         values = entry.values()
         cur.execute(SQL['insert_route'],list(values))
-        print('done route')
+        
 
 def insert_service(data):
     conn = get_conn()
@@ -103,7 +103,7 @@ def insert_service(data):
     for entry in data:
         values = entry.values()
         cur.execute(SQL['insert_service'],list(values))
-        print('done service')
+        
 
 def insert_stops(data):
     conn = get_conn()
@@ -112,7 +112,7 @@ def insert_stops(data):
     for entry in data:
         values = entry.values()
         cur.execute(SQL['insert_stops'],list(values))
-        print('done stops')
+        
 
 # def get_routes(data)
 conn.commit()
