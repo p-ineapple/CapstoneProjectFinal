@@ -62,19 +62,26 @@ SQL = {
     VALUES(?,?,?,?,?);
     ''',
 
-    'get_routes':'''
+    'get_stopsequence':
+    '''
+    SELECT StopSequence, Direction
+    FROM bus_routes
+    WHERE ServiceNo = ? AND BusStopCode = ?;
+    ''',
+    
+    'get_routes': '''
     SELECT * FROM bus_routes
-    WHERE bus_routes.ServiceNo = ? 
+    WHERE ServiceNo = ? AND Direction = ? AND StopSequence >= ? AND StopSequence <= ?;
     ''',
 
-    'get_services':'''
-    SELECT * FROM bus_routes
-    WHERE bus_routes.ServiceNo = ? 
+    'get_bustype':'''
+    SELECT Category
+    FROM bus_services
+    WHERE ServiceNo = ? AND Direction = ? ;
     ''',
 
     'get_stops':'''
-    SELECT * FROM bus_stops
-    WHERE bus_stops.BusStopCode = ? 
+    SELECT * FROM bus_stops;
     ''',
     }
 
@@ -83,43 +90,89 @@ SQL = {
 def get_conn():
     conn = sqlite3.connect('capstone.db')
     return conn
+
+def get_stopsequence(serviceno, buscode):
+    conn = get_conn()
+    cur = conn.cursor()
+    data = cur.execute(SQL['get_stopsequence'], (serviceno, buscode))
+    data = cur.fetchall()
+    conn.commit()
+    conn.close()
+    return data
+
+def get_routes(serviceno, direction, startno, endno):
+    conn = get_conn()
+    cur = conn.cursor()
+    data = cur.execute(SQL['get_routes'], (serviceno, direction, startno, endno))
+    data = cur.fetchall()
+    conn.commit()
+    conn.close()
+    return data
     
-conn = get_conn()
-cur = conn.cursor()
-
-def insert_route(data):
+def get_bustype(serviceno, direction):
     conn = get_conn()
     cur = conn.cursor()
-    cur.execute(SQL['bus_routes_table']);
-    for entry in data:
-        values = entry.values()
-        cur.execute(SQL['insert_route'],list(values))
+    data = cur.execute(SQL['get_bustype'], (serviceno,direction))
+    data = cur.fetchall()
     conn.commit()
     conn.close()
-        
+    return data
 
-def insert_service(data):
+def get_stops():
     conn = get_conn()
     cur = conn.cursor()
-    cur.execute(SQL['bus_services_table']);
-    for entry in data:
-        values = entry.values()
-        cur.execute(SQL['insert_service'],list(values))
+    data = cur.execute(SQL['get_stops'])
+    data = cur.fetchall()
     conn.commit()
     conn.close()
+    return data
+
+
+'''
+===========IMPLEMENTING DATABASE CODE DUMP SECTION====================
+'''
+
+# def insert_route(data):
+#     '''
+#     creates a bus_routes table
+#     inputs data into the table
+#     '''
+#     conn = get_conn()
+#     cur = conn.cursor()
+#     cur.execute(SQL['bus_routes_table']);
+#     for entry in data:
+#         values = entry.values()
+#         cur.execute(SQL['insert_route'],list(values))
+#     conn.commit()
+#     conn.close()
         
 
-def insert_stops(data):
-    conn = get_conn()
-    cur = conn.cursor()
-    cur.execute(SQL['bus_stops_table']);
-    for entry in data:
-        values = entry.values()
-        cur.execute(SQL['insert_stops'],list(values))
-    conn.commit()
-    conn.close()
+# def insert_service(data):
+#     '''
+#     creates a bus_service table
+#     inputs data into the table
+#     '''
+#     conn = get_conn()
+#     cur = conn.cursor()
+#     cur.execute(SQL['bus_services_table']);
+#     for entry in data:
+#         values = entry.values()
+#         cur.execute(SQL['insert_service'],list(values))
+#     conn.commit()
+#     conn.close()
         
 
-# def get_routes(data)
-conn.commit()
-conn.close()
+# def insert_stops(data):
+#     '''
+#     creates a bus_stops table
+#     inputs data into the table
+#     '''
+#     conn = get_conn()
+#     cur = conn.cursor()
+#     cur.execute(SQL['bus_stops_table']);
+#     for entry in data:
+#         values = entry.values()
+#         cur.execute(SQL['insert_stops'],list(values))
+#     conn.commit()
+#     conn.close()
+        

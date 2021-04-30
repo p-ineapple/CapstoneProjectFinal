@@ -1,0 +1,58 @@
+{{busno}}, {{payment}}, {{status}}, {{start}}, {{end}} , {{price}}
+<!-- https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_restaurant_modal -->
+<!DOCTYPE html>
+<html>
+<title>Capstone</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1,h5 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  background-image: url('https://live.staticflickr.com/7699/17185052477_a9d1799994_b.jpg');
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.5;
+  filter: filter: blur(5px);
+}
+</style>
+<body>
+
+<div class="bgimg w3-display-container w3-text-white">
+  <div class="w3-display-middle w3-jumbo">
+    <p>Croject Papstone</p>
+  </div>
+  <div class="w3-display-topleft w3-container w3-xlarge">
+    <p><button onclick="document.getElementById('nearestbusstop').style.display='block'" class="w3-button w3-black">Nearest Bus Stop</button></p>
+    <p><button onclick="document.getElementById('busfarecalculator').style.display='block'" class="w3-button w3-black">Bus Fare Calculator</button></p>
+    <p class="w3-xlarge w3-black">After submitting click on the button again cos I can't seem to make the pop up stay on sreen :/</p>
+  </div>
+</div>
+
+<!-- Bus Fare Calculator Modal -->
+<div id="busfarecalculator" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black">
+      <span onclick="document.getElementById('busfarecalculator').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <h1>Bus Fare Calculator</h1>
+    </div>
+    <div class="w3-container">
+        
+        <h1 style="font-size:25">
+            <strong>Fare:</strong>
+        </h1>
+        <h1 style="font-size:50">
+            ${{price}}
+        </h1>
+        <style>
+        h1 {text-align: center;}
+        </style>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

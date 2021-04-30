@@ -1,12 +1,109 @@
+<!-- https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_restaurant_modal -->
+<!DOCTYPE html>
 <html>
-    <head> 
-        <title>
-            heh
-        </title>
-    </head>
+<title>Capstone</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1,h5 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  background-image: url('https://live.staticflickr.com/7699/17185052477_a9d1799994_b.jpg');
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.5;
+  filter: filter: blur(5px);
+}
+</style>
+<body>
 
-    <body>
-        yes
-    </body>
+<div class="bgimg w3-display-container w3-text-white">
+  <div class="w3-display-middle w3-jumbo">
+    <p>Croject Papstone</p>
+  </div>
+  <div class="w3-display-topleft w3-container w3-xlarge">
+    <p><button onclick="document.getElementById('nearestbusstop').style.display='block'" class="w3-button w3-black">Nearest Bus Stop</button></p>
+    <p><button onclick="document.getElementById('busfarecalculator').style.display='block'" class="w3-button w3-black">Bus Fare Calculator</button></p>
+    <p class="w3-xlarge w3-black">After submitting click on the button again cos I can't seem to make the pop up stay on sreen :/</p>
+  </div>
+</div>
 
+<!-- Nearest Bus Stop Modal -->
+<div id="nearestbusstop" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black w3-display-container">
+      <span onclick="document.getElementById('nearestbusstop').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <h1>Nearest Bus Stop</h1>
+    </div>
+    <div class="w3-container">
+    <form action='/nearestbus' method='GET'
+    <fieldset>
+    <legend>Enter Your Location Here:</legend>
+    
+    <label for="latt">Lattitude:</label><br>
+    <input type="text" id="latt" name="latt" value=""><br>
+    <label for="long">Longtitude:</label><br>
+    <input type="text" id="long" name="long" value=""><br><br>
+    <input type="submit" value="Submit">
+    </fieldset>
+    </form>
+    <p>
+    
+    </p>
+    </div>
+  </div>
+</div>
+
+<!-- Bus Fare Calculator Modal -->
+<div id="busfarecalculator" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black">
+      <span onclick="document.getElementById('busfarecalculator').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <h1>Bus Fare Calculator</h1>
+    </div>
+    <div class="w3-container">
+      <p><strong>Enter your details here:</strong></p>
+        <form action="/fare" target="_blank">
+        <label for="busno">Bus Number:</label><br>
+        <input type="text" id="busno" name="busno" value=""><br><br>
+
+        <label for="status">Status:</label><br>
+        <select name="status" id="status">
+        <option value="adult">Adult</option>
+        <option value="student">Student</option>
+        <option value="senior">Senior Citizen</option>
+        <option value="wtc">Workfare Transport Concession</option>
+        <option value="pd">Persons with Disabilities</option>
+        </select>
+        <br><br>
+        
+        <label for="payment">Payment type:</label><br>
+        <select name="payment" id="payment">
+        <option value="card">Card</option>
+        <option value="cash">Cash</option>
+        </select>
+        <br><br>
+
+        <label for="start">Starting Bus Stop:</label><br>
+        <input type="text" id="start" name="start" value=""><br><br>
+
+        <label for="end">Ending Bus Stop:</label><br>
+        <input type="text" id="end" name="end" value=""><br><br>
+
+        <input type="submit" value="Submit">
+        </form>
+        <br>
+        <!-- <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
+        <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="How many people" required name="People"></p>
+        <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Date and time" required name="date" value="2020-11-16T20:00"></p>
+        <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
+        <p><button class="w3-button" type="submit">SEND MESSAGE</button></p> -->
+    </div>
+  </div>
+</div>
+
+</body>
 </html>
